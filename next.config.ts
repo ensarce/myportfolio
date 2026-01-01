@@ -7,8 +7,8 @@ const nextConfig: NextConfig = {
   },
   // GitHub Pages uses repository name as base path
   // Change 'portfolio' to your actual GitHub repository name
-  basePath: process.env.NODE_ENV === "production" ? "/portfolio" : "",
-  assetPrefix: process.env.NODE_ENV === "production" ? "/portfolio" : "",
+  basePath: process.env.NODE_ENV === "production" ? "/myportfolio" : "",
+  assetPrefix: process.env.NODE_ENV === "production" ? "/myportfolio" : "",
   trailingSlash: true,
 };
 
