@@ -12,20 +12,20 @@ export default function LanguageSwitcher() {
     ];
 
     return (
-        <div className="fixed top-6 left-6 z-50 flex items-center gap-1 bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-full p-1">
+        <div className="fixed top-4 left-4 sm:top-6 sm:left-6 z-50 flex items-center gap-1 bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-full p-0.5 sm:p-1">
             {languages.map((lang) => (
                 <motion.button
                     key={lang.code}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setLanguage(lang.code)}
-                    className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${language === lang.code
+                    className={`px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all ${language === lang.code
                             ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-cyan-500/25"
                             : "text-gray-400 hover:text-white"
                         }`}
                 >
-                    <span className="mr-1">{lang.flag}</span>
-                    {lang.label}
+                    <span className="mr-0.5 sm:mr-1">{lang.flag}</span>
+                    <span className="hidden sm:inline">{lang.label}</span>
                 </motion.button>
             ))}
         </div>

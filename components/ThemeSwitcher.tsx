@@ -7,12 +7,12 @@ export default function ThemeSwitcher() {
     const { theme, toggleTheme } = useTheme();
 
     return (
-        <div className="fixed top-6 right-6 z-50">
+        <div className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50">
             <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={toggleTheme}
-                className="w-12 h-12 rounded-full bg-gray-800/80 backdrop-blur-sm border border-gray-700 flex items-center justify-center text-gray-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-colors shadow-lg"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-800/80 backdrop-blur-sm border border-gray-700 flex items-center justify-center text-gray-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-colors shadow-lg"
                 aria-label="Toggle theme"
             >
                 <AnimatePresence mode="wait">
@@ -23,7 +23,7 @@ export default function ThemeSwitcher() {
                             animate={{ rotate: 0, opacity: 1 }}
                             exit={{ rotate: 90, opacity: 0 }}
                             transition={{ duration: 0.2 }}
-                            className="w-6 h-6"
+                            className="w-5 h-5 sm:w-6 sm:h-6"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -37,7 +37,7 @@ export default function ThemeSwitcher() {
                             animate={{ rotate: 0, opacity: 1 }}
                             exit={{ rotate: -90, opacity: 0 }}
                             transition={{ duration: 0.2 }}
-                            className="w-6 h-6"
+                            className="w-5 h-5 sm:w-6 sm:h-6"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"

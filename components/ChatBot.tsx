@@ -90,7 +90,6 @@ export default function ChatBot() {
         setInput("");
         setIsLoading(true);
 
-        // Simulate AI response with slight delay
         setTimeout(() => {
             const response = getResponse(userMessage.content, language as "tr" | "en");
 
@@ -113,7 +112,7 @@ export default function ChatBot() {
             {/* Floating Chat Button */}
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-cyan-500/30 flex items-center justify-center hover:shadow-cyan-500/50 transition-shadow duration-300"
+                className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-cyan-500/30 flex items-center justify-center hover:shadow-cyan-500/50 transition-shadow duration-300"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Chat with AI Assistant"
@@ -125,7 +124,7 @@ export default function ChatBot() {
                             initial={{ rotate: -90, opacity: 0 }}
                             animate={{ rotate: 0, opacity: 1 }}
                             exit={{ rotate: 90, opacity: 0 }}
-                            className="w-6 h-6"
+                            className="w-5 h-5 sm:w-6 sm:h-6"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -138,7 +137,7 @@ export default function ChatBot() {
                             initial={{ rotate: 90, opacity: 0 }}
                             animate={{ rotate: 0, opacity: 1 }}
                             exit={{ rotate: -90, opacity: 0 }}
-                            className="w-7 h-7"
+                            className="w-6 h-6 sm:w-7 sm:h-7"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -157,29 +156,29 @@ export default function ChatBot() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="fixed bottom-28 right-6 z-50 w-[380px] h-[520px] bg-gray-900/95 backdrop-blur-xl border border-gray-800 rounded-2xl shadow-2xl shadow-black/50 flex flex-col overflow-hidden"
+                        className="fixed bottom-20 right-2 left-2 sm:bottom-28 sm:right-6 sm:left-auto z-50 sm:w-[380px] h-[70vh] sm:h-[520px] max-h-[600px] bg-gray-900/95 backdrop-blur-xl border border-gray-800 rounded-2xl shadow-2xl shadow-black/50 flex flex-col overflow-hidden"
                     >
                         {/* Header */}
-                        <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-gray-900 to-gray-800 border-b border-gray-800">
+                        <div className="flex items-center gap-3 px-4 sm:px-5 py-3 sm:py-4 bg-gradient-to-r from-gray-900 to-gray-800 border-b border-gray-800">
                             <div className="relative">
-                                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 flex items-center justify-center">
-                                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 flex items-center justify-center">
+                                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                     </svg>
                                 </div>
-                                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-gray-900" />
+                                <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full border-2 border-gray-900" />
                             </div>
-                            <div className="flex-1">
-                                <h3 className="font-semibold text-white">
+                            <div className="flex-1 min-w-0">
+                                <h3 className="font-semibold text-white text-sm sm:text-base truncate">
                                     {language === "tr" ? "Ensar'ın Asistanı" : "Ensar's Assistant"}
                                 </h3>
-                                <p className="text-xs text-gray-400">
+                                <p className="text-xs text-gray-400 truncate">
                                     {language === "tr" ? "Hızlı cevaplar" : "Quick answers"}
                                 </p>
                             </div>
                             <button
                                 onClick={() => setIsOpen(false)}
-                                className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+                                className="p-1.5 sm:p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
                             >
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -188,7 +187,7 @@ export default function ChatBot() {
                         </div>
 
                         {/* Messages */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
+                        <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
                             {messages.map((message) => (
                                 <motion.div
                                     key={message.id}
@@ -197,12 +196,12 @@ export default function ChatBot() {
                                     className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                                 >
                                     <div
-                                        className={`max-w-[85%] px-4 py-3 rounded-2xl ${message.role === "user"
+                                        className={`max-w-[90%] sm:max-w-[85%] px-3 sm:px-4 py-2 sm:py-3 rounded-2xl ${message.role === "user"
                                                 ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-br-md"
                                                 : "bg-gray-800 text-gray-200 rounded-bl-md"
                                             }`}
                                     >
-                                        <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                                        <p className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
                                     </div>
                                 </motion.div>
                             ))}
@@ -213,7 +212,7 @@ export default function ChatBot() {
                                     animate={{ opacity: 1, y: 0 }}
                                     className="flex justify-start"
                                 >
-                                    <div className="bg-gray-800 text-gray-200 px-4 py-3 rounded-2xl rounded-bl-md">
+                                    <div className="bg-gray-800 text-gray-200 px-3 sm:px-4 py-2 sm:py-3 rounded-2xl rounded-bl-md">
                                         <div className="flex gap-1.5">
                                             <motion.div
                                                 animate={{ opacity: [0.4, 1, 0.4] }}
@@ -238,13 +237,13 @@ export default function ChatBot() {
                         </div>
 
                         {/* Quick Suggestions */}
-                        <div className="px-4 py-2 border-t border-gray-800/50">
+                        <div className="px-3 sm:px-4 py-2 border-t border-gray-800/50">
                             <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
                                 {quickSuggestions.map((suggestion) => (
                                     <button
                                         key={suggestion}
                                         onClick={() => setInput(suggestion)}
-                                        className="flex-shrink-0 px-3 py-1.5 text-xs bg-gray-800 text-gray-400 rounded-full hover:bg-gray-700 hover:text-cyan-400 transition-colors border border-gray-700"
+                                        className="flex-shrink-0 px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs bg-gray-800 text-gray-400 rounded-full hover:bg-gray-700 hover:text-cyan-400 transition-colors border border-gray-700"
                                     >
                                         {suggestion}
                                     </button>
@@ -253,7 +252,7 @@ export default function ChatBot() {
                         </div>
 
                         {/* Input */}
-                        <form onSubmit={handleSubmit} className="p-4 border-t border-gray-800">
+                        <form onSubmit={handleSubmit} className="p-3 sm:p-4 border-t border-gray-800">
                             <div className="flex gap-2">
                                 <input
                                     ref={inputRef}
@@ -261,7 +260,7 @@ export default function ChatBot() {
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
                                     placeholder={t.chatPlaceholder}
-                                    className="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-colors text-sm"
+                                    className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-colors text-xs sm:text-sm"
                                     disabled={isLoading}
                                 />
                                 <motion.button
@@ -269,9 +268,9 @@ export default function ChatBot() {
                                     disabled={!input.trim() || isLoading}
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
+                                    className="px-3 sm:px-4 py-2.5 sm:py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
                                 >
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                                     </svg>
                                 </motion.button>
