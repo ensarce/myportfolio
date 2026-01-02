@@ -4,32 +4,41 @@ import { motion } from "framer-motion";
 import { useLanguage } from "./LanguageProvider";
 
 const codeSnippet = {
-    en: `const engineer = {
+    en: `const developer = {
   name: "Ensar Kaplan",
   role: "Full Stack Developer",
-  experience: "3+ years",
-  focus: "Healthcare & Enterprise",
-  philosophy: "Understand first",
-  stack: ["Angular", ".NET", "Java"]
+  focus: "HealthTech & DevOps",
+  expertise: [
+    "C# .NET WinForms",
+    "Angular Web Apps",
+    "Docker & Kubernetes"
+  ]
 };`,
-    tr: `const muhendis = {
+    tr: `const gelistirici = {
   isim: "Ensar Kaplan",
-  rol: "Full Stack Geliştirici",
-  deneyim: "3+ yıl",
-  odak: "Sağlık & Kurumsal",
-  felsefe: "Önce anla",
-  teknolojiler: ["Angular", ".NET", "Java"]
+  rol: "Full Stack Developer",
+  odak: "HealthTech & DevOps",
+  uzmanlik: [
+    "C# .NET WinForms",
+    "Angular Web Apps",
+    "Docker & Kubernetes"
+  ]
 };`,
 };
 
 const techStack = [
-    "Angular", "TypeScript", "JavaScript", "React",
-    "C#", ".NET", "Java", "Spring Boot", "Python",
-    "MSSQL", "MongoDB", "Docker", "Kubernetes", "REST API"
+    "C#", ".NET", "WinForms", "Angular", "TypeScript",
+    "Java", "Spring Boot", "Docker", "Kubernetes",
+    "GitLab CI/CD", "MSSQL", "REST API"
 ];
 
 export default function About() {
     const { language, t } = useLanguage();
+
+    const aboutText = {
+        en: "I am a Full Stack Developer & DevOps enthusiast with 3.5+ years of experience in HealthTech. I specialize in building robust C# .NET WinForms applications and managing the entire deployment lifecycle using Docker, Kubernetes, and GitLab CI/CD. I also love creating user-friendly web interfaces with Angular.",
+        tr: "HealthTech alaninda 3.5+ yillik deneyime sahip Full Stack Developer ve DevOps meraklisiyim. C# .NET WinForms uygulamalari gelistirme ve Docker, Kubernetes, GitLab CI/CD ile tum deployment yaşam döngüsünü yönetme konularinda uzmanım. Ayrica Angular ile kullanici dostu web arayüzleri olusturmayi seviyorum."
+    };
 
     return (
         <section id="about" className="py-16 sm:py-24 px-4 sm:px-6 relative">
@@ -64,9 +73,7 @@ export default function About() {
                                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500" />
                                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500" />
                                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500" />
-                                <span className="ml-4 text-gray-500 text-xs">
-                                    {language === "tr" ? "muhendis.ts" : "engineer.ts"}
-                                </span>
+                                <span className="ml-4 text-gray-500 text-xs">developer.ts</span>
                             </div>
                             {/* Code Content */}
                             <pre className="text-gray-300 whitespace-pre-wrap break-words">
@@ -77,7 +84,7 @@ export default function About() {
                         </div>
                     </motion.div>
 
-                    {/* Philosophy Text */}
+                    {/* About Text */}
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -86,11 +93,14 @@ export default function About() {
                         className="space-y-4 sm:space-y-6 order-1 lg:order-2"
                     >
                         <h3 className="text-xl sm:text-2xl font-semibold text-white">{t.myPhilosophy}</h3>
-                        <blockquote className="text-base sm:text-xl text-gray-300 italic border-l-4 border-cyan-500 pl-4 sm:pl-6">
-                            &ldquo;{t.philosophyQuote}&rdquo;
-                        </blockquote>
+
+                        {/* About Me Text */}
+                        <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
+                            {language === "tr" ? aboutText.tr : aboutText.en}
+                        </p>
+
                         <p className="text-gray-400 text-sm sm:text-base">
-                            <span className="text-cyan-400 font-semibold">3+ {t.yearsExperience}</span> {t.atHospital}
+                            <span className="text-cyan-400 font-semibold">3.5+ {t.yearsExperience}</span> {t.atHospital}
                         </p>
 
                         {/* Tech Stack Badges */}
