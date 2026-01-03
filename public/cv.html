@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ensar Kaplan - CV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #2980b9;
+            --text-color: #333;
+            --light-gray: #f4f6f7;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            background-color: #525659;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 1.5cm 2cm;
+            margin: 1cm auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            box-sizing: border-box;
+        }
+
+        header {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24pt;
+            color: var(--primary-color);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .title {
+            font-size: 12pt;
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            font-size: 9pt;
+            color: #555;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .contact-info a {
+            color: #444;
+            text-decoration: none;
+            border-bottom: 1px solid #ddd;
+            transition: color 0.3s;
+        }
+        
+        .contact-info a:hover {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        h2 {
+            font-size: 13pt;
+            color: var(--primary-color);
+            border-left: 4px solid var(--accent-color);
+            padding-left: 10px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        p, li {
+            font-size: 10pt;
+            text-align: justify;
+        }
+
+        .job-block {
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+
+        .company { font-weight: 700; font-size: 11pt; }
+        .role { font-style: italic; color: #555; font-size: 10pt; }
+        .date { font-weight: 500; color: var(--accent-color); font-size: 9pt; }
+
+        ul { margin-top: 5px; margin-bottom: 10px; padding-left: 18px; }
+        li { margin-bottom: 4px; }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .skill-item { font-size: 10pt; }
+        .skill-item strong { color: var(--primary-color); }
+
+        .project-item {
+            margin-bottom: 10px;
+        }
+        .project-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 10.5pt;
+        }
+        .project-link {
+            font-size: 9pt;
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-left: 5px;
+        }
+
+        @media print {
+            body { 
+                margin: 0; 
+                background: white; 
+            }
+            .page {
+                width: 100%;
+                margin: 0;
+                padding: 1cm;
+                box-shadow: none;
+                border: none;
+            }
+            a[href]:after { content: none !important; }
+            h2, h3 { page-break-after: avoid; }
+            section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header>
+            <h1>ENSAR KAPLAN</h1>
+            <div class="title">Yazılım Geliştirme Uzmanı (Full Stack & DevOps)</div>
+            <div class="contact-info">
+                <span>📍 İstanbul, Türkiye</span>
+                <span>📞 +90 553 076 29 25</span>
+                <span>✉️ <a href="mailto:ensarkaplan.ce@gmail.com">ensarkaplan.ce@gmail.com</a></span>
+                <span>🌐 <a href="https://ensarce.github.io/myportfolio/" target="_blank">ensarce.github.io/myportfolio</a></span>
+                <span>💻 <a href="https://github.com/ensarce/" target="_blank">github.com/ensarce</a></span>
+            </div>
+        </header>
+
+        <section>
+            <h2>Özet</h2>
+            <p>
+                Sağlık teknolojileri (HealthTech) alanında 3.5 yılı aşkın deneyime sahip bir Yazılım Geliştirme Uzmanıyım. Kritik hastane süreçlerini yöneten <strong>C# .NET WinForms</strong> mimarilerinde uzmanlığımın yanı sıra, <strong>Java/Angular</strong> projelerinde Full Stack geliştirme yapıyorum. Yazılım yaşam döngüsünde <strong>DevOps</strong> (Docker, Kubernetes, Rancher, GitLab CI/CD) süreçlerini bizzat yöneterek uçtan uca teslimat ve versiyon takibi sağlıyorum.
+            </p>
+        </section>
+
+        <section>
+            <h2>İş Deneyimi</h2>
+
+            <div class="job-block">
+                <div class="job-header">
+                    <div>
+                        <span class="company">Hisar Intercontinental Hospital</span> | İstanbul
+                        <br>
+                        <span class="role">Yazılım Geliştirme Uzmanı</span>
+                    </div>
+                    <span class="date">Haziran 2022 – Halen</span>
+                </div>
+                <ul>
+                    <li><strong>C# .NET Geliştirme:</strong> Kurumsal ölçekli C# WinForms uygulamalarının mimari geliştirmesini ve bakımını 3.5 yıldır kesintisiz yürütüyorum.</li>
+                    <li><strong>DevOps & CI/CD:</strong> Projelerin <strong>GitLab</strong> üzerindeki CI/CD boru hatlarını yönetiyorum. Uygulamaların <strong>Docker</strong> ile konteynerize edilmesi, <strong>Rancher</strong> ve <strong>Kubernetes</strong> ortamlarında canlıya alınması süreçlerini gerçekleştiriyorum.</li>
+                    <li><strong>Full Stack Destek:</strong> <strong>Java (Backend)</strong> ve <strong>Angular (Frontend)</strong> projelerine aktif destek vererek yeni modüller geliştiriyor ve sistemdeki hataları çözüyorum.</li>
+                    <li><strong>Veritabanı:</strong> MSSQL üzerinde karmaşık sorgular ve optimizasyonlar ile veri performansını artırdım.</li>
+                </ul>
+            </div>
+
+            <div class="job-block">
+                <div class="job-header">
+                    <div>
+                        <span class="company">Aurora Bilişim</span> | İstanbul
+                        <br>
+                        <span class="role">Yazılım Stajyeri</span>
+                    </div>
+                    <span class="date">Haziran 2016 – Eylül 2016</span>
+                </div>
+                <ul>
+                    <li>Java ve Android tabanlı mobil uygulama geliştirme süreçlerinde görev aldım.</li>
+                    <li>Diyetisyen takip uygulaması projesinde RestEasy ve SOAP servis entegrasyonlarını gerçekleştirdim.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Kişisel Projeler & GitHub</h2>
+            
+            <div class="job-block">
+                <div class="project-item">
+                    <span class="project-title">Portfolyo Websitesi</span>
+                    <a href="https://ensarce.github.io/myportfolio/" class="project-link">(ensarce.github.io/myportfolio)</a>
+                    <p style="margin-top:2px;">Angular kullanılarak geliştirilmiş, kişisel projelerimi ve yetkinliklerimi sergilediğim responsive web sitesi.</p>
+                </div>
+
+                <div class="project-item">
+                    <span class="project-title">Görüntü İşleme ile Mağaza Yoğunluk Tespiti</span>
+                    <p style="margin-top:2px;">Python ve OpenCV kütüphaneleri kullanılarak mağaza içi insan yoğunluğunu gerçek zamanlı analiz eden bitirme projesi.</p>
+                </div>
+                
+                <div class="project-item">
+                    <span class="project-title">Hasta Takip Sistemi & Diğer Projeler</span>
+                    <a href="https://github.com/ensarce/" class="project-link">(github.com/ensarce)</a>
+                    <p style="margin-top:2px;">.NET ve Angular mimarileri kullanılarak geliştirilmiş çeşitli tam yığın (full-stack) proje örnekleri.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Teknik Yetkinlikler</h2>
+            <div class="skills-grid">
+                <div class="skill-item"><strong>Programlama:</strong> C# .NET (WinForms), Java, TypeScript, Python</div>
+                <div class="skill-item"><strong>Web:</strong> Angular, HTML5, CSS3, Bootstrap, Material</div>
+                <div class="skill-item"><strong>DevOps:</strong> Docker, Kubernetes, Rancher, GitLab CI/CD</div>
+                <div class="skill-item"><strong>Veritabanı:</strong> MSSQL (T-SQL, Stored Procedures)</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Eğitim</h2>
+            <div class="job-block">
+                <div class="job-header">
+                    <span class="company">Karabük Üniversitesi</span>
+                    <span class="date">Eylül 2013 – Haziran 2020</span>
+                </div>
+                <div style="font-size: 10pt;">Bilgisayar Mühendisliği (İngilizce)</div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Diller</h2>
+            <div class="skills-grid">
+                <div class="skill-item"><strong>Türkçe:</strong> Anadil</div>
+                <div class="skill-item"><strong>İngilizce:</strong> Mesleki Yetkinlik</div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
