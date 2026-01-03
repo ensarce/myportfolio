@@ -6,18 +6,12 @@ import { useLanguage } from "./LanguageProvider";
 // Helper to replace Turkish characters for PDF compatibility
 const normalizeTurkish = (text: string): string => {
     return text
-        .replace(/ş/g, "s")
-        .replace(/Ş/g, "S")
-        .replace(/ğ/g, "g")
-        .replace(/Ğ/g, "G")
-        .replace(/ı/g, "i")
-        .replace(/İ/g, "I")
-        .replace(/ö/g, "o")
-        .replace(/Ö/g, "O")
-        .replace(/ü/g, "u")
-        .replace(/Ü/g, "U")
-        .replace(/ç/g, "c")
-        .replace(/Ç/g, "C");
+        .replace(/ş/g, "s").replace(/Ş/g, "S")
+        .replace(/ğ/g, "g").replace(/Ğ/g, "G")
+        .replace(/ı/g, "i").replace(/İ/g, "I")
+        .replace(/ö/g, "o").replace(/Ö/g, "O")
+        .replace(/ü/g, "u").replace(/Ü/g, "U")
+        .replace(/ç/g, "c").replace(/Ç/g, "C");
 };
 
 export default function ResumeDownload() {
@@ -28,178 +22,184 @@ export default function ResumeDownload() {
 
         const doc = new jsPDF();
         const pageWidth = doc.internal.pageSize.getWidth();
-        const margin = 20;
+        const pageHeight = doc.internal.pageSize.getHeight();
+        const margin = 15;
         const contentWidth = pageWidth - margin * 2;
 
-        let y = 25;
+        let y = 20;
+
+        // Check if we need new page
+        const checkNewPage = (neededSpace: number) => {
+            if (y + neededSpace > pageHeight - 20) {
+                doc.addPage();
+                y = 20;
+            }
+        };
 
         // ===== HEADER =====
-        doc.setFillColor(8, 145, 178); // Cyan-600
-        doc.rect(0, 0, pageWidth, 50, "F");
+        doc.setFillColor(8, 145, 178);
+        doc.rect(0, 0, pageWidth, 40, "F");
 
         doc.setTextColor(255, 255, 255);
-        doc.setFontSize(26);
+        doc.setFontSize(22);
         doc.setFont("helvetica", "bold");
-        doc.text("ENSAR KAPLAN", pageWidth / 2, y, { align: "center" });
+        doc.text("ENSAR KAPLAN", pageWidth / 2, 15, { align: "center" });
 
-        y += 10;
-        doc.setFontSize(12);
+        doc.setFontSize(11);
         doc.setFont("helvetica", "normal");
-        doc.text("Full Stack Developer", pageWidth / 2, y, { align: "center" });
+        doc.text("Full Stack Developer & DevOps Enthusiast", pageWidth / 2, 24, { align: "center" });
 
-        y += 12;
-        doc.setFontSize(9);
-        doc.text("ensarkaplan.ce@gmail.com  |  +90 553 076 29 25  |  Istanbul, Turkey", pageWidth / 2, y, { align: "center" });
+        doc.setFontSize(8);
+        doc.text("ensarkaplan.ce@gmail.com | +90 553 076 29 25 | Istanbul, Turkey", pageWidth / 2, 32, { align: "center" });
+        doc.text("github.com/ensarce | linkedin.com/in/ensarkaplance", pageWidth / 2, 38, { align: "center" });
 
-        y = 65;
-
-        // ===== HELPER FUNCTIONS =====
-        const drawSection = (title: string) => {
-            doc.setDrawColor(8, 145, 178);
-            doc.setLineWidth(0.5);
-            doc.line(margin, y, pageWidth - margin, y);
-            y += 8;
-            doc.setTextColor(8, 145, 178);
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "bold");
-            doc.text(normalizeTurkish(title), margin, y);
-            y += 8;
-        };
-
-        const drawText = (text: string, indent: number = 0) => {
-            doc.setTextColor(60, 60, 60);
-            doc.setFontSize(10);
-            doc.setFont("helvetica", "normal");
-            const lines = doc.splitTextToSize(normalizeTurkish(text), contentWidth - indent);
-            doc.text(lines, margin + indent, y);
-            y += lines.length * 5;
-        };
-
-        const drawBoldText = (text: string) => {
-            doc.setTextColor(30, 30, 30);
-            doc.setFontSize(11);
-            doc.setFont("helvetica", "bold");
-            doc.text(normalizeTurkish(text), margin, y);
-            y += 6;
-        };
-
-        const drawSubText = (text: string) => {
-            doc.setTextColor(8, 145, 178);
-            doc.setFontSize(10);
-            doc.setFont("helvetica", "normal");
-            doc.text(normalizeTurkish(text), margin, y);
-            y += 5;
-        };
-
-        const drawGrayText = (text: string) => {
-            doc.setTextColor(100, 100, 100);
-            doc.setFontSize(9);
-            doc.setFont("helvetica", "italic");
-            doc.text(normalizeTurkish(text), margin, y);
-            y += 7;
-        };
+        y = 50;
 
         // ===== SUMMARY =====
-        drawSection(language === "tr" ? "OZET" : "SUMMARY");
+        doc.setTextColor(8, 145, 178);
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "bold");
+        doc.text(normalizeTurkish(language === "tr" ? "OZET" : "SUMMARY"), margin, y);
+        y += 6;
+
+        doc.setTextColor(50, 50, 50);
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
         const summary = language === "tr"
-            ? "Kurumsal saglik yazilimlari gelistirmede 3+ yil deneyimli Full Stack Developer. Angular, C#/.NET ve Java konularinda uzman. Is odakli gelistirme yaklasimi ve uctan uca proje sahipligi."
-            : "Full Stack Developer with 3+ years of experience building enterprise healthcare software solutions. Expert in Angular, C#/.NET, and Java with end-to-end project ownership and business-driven development approach.";
-        drawText(summary);
-        y += 5;
+            ? "HealthTech alaninda 3.5+ yillik deneyime sahip Full Stack Developer ve DevOps meraklisi. C# .NET WinForms uygulamalari ve Docker, Kubernetes, GitLab CI/CD ile deployment yonetimi konularinda uzman."
+            : "Full Stack Developer & DevOps enthusiast with 3.5+ years of experience in HealthTech. Specializing in C# .NET WinForms applications and deployment lifecycle management with Docker, Kubernetes, and GitLab CI/CD.";
+        const summaryLines = doc.splitTextToSize(normalizeTurkish(summary), contentWidth);
+        doc.text(summaryLines, margin, y);
+        y += summaryLines.length * 4 + 6;
 
         // ===== EXPERIENCE =====
-        drawSection(language === "tr" ? "DENEYIM" : "EXPERIENCE");
-        drawBoldText(language === "tr" ? "Yazilim Gelistirme Uzmani" : "Software Development Specialist");
-        drawSubText("Hisar Intercontinental Hospital");
-        drawGrayText(language === "tr" ? "Haziran 2022 - Gunumuz | Istanbul" : "June 2022 - Present | Istanbul");
+        checkNewPage(50);
+        doc.setTextColor(8, 145, 178);
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "bold");
+        doc.text(normalizeTurkish(language === "tr" ? "DENEYIM" : "EXPERIENCE"), margin, y);
+        y += 6;
+
+        doc.setTextColor(30, 30, 30);
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "bold");
+        doc.text(normalizeTurkish(language === "tr" ? "Yazilim Gelistirme Uzmani" : "Software Development Specialist"), margin, y);
+        y += 5;
+
+        doc.setTextColor(8, 145, 178);
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+        doc.text("Hisar Intercontinental Hospital", margin, y);
+        doc.setTextColor(100, 100, 100);
+        doc.text(language === "tr" ? "Haziran 2022 - Gunumuz" : "June 2022 - Present", pageWidth - margin, y, { align: "right" });
+        y += 6;
 
         const expItems = language === "tr" ? [
-            "Java (Backend) ve Angular (Frontend) ile full-stack gelistirme",
+            "C# .NET WinForms ile masaustu uygulamalar gelistirme",
+            "Java Spring Boot ve Angular ile full-stack web gelistirme",
+            "Docker, Kubernetes ve GitLab CI/CD ile DevOps surecleri",
             "MSSQL veritabani operasyonlari ve optimizasyon",
-            "C# .NET ile masaustu uygulamalar",
-            "Docker containerization ve Rancher deployment",
-            "REST ve SOAP API entegrasyonlari",
             "Ameliyathane optimizasyonu ile %30+ verimlilik artisi"
         ] : [
-            "Full-stack development with Java (Backend) and Angular (Frontend)",
-            "MSSQL database operations and query optimization",
-            "Desktop applications development with C# .NET",
-            "Docker containerization and Rancher deployment",
-            "REST and SOAP API integrations",
+            "Desktop application development with C# .NET WinForms",
+            "Full-stack web development with Java Spring Boot and Angular",
+            "DevOps workflows with Docker, Kubernetes, and GitLab CI/CD",
+            "MSSQL database operations and optimization",
             "Operating room optimization achieving 30%+ efficiency increase"
         ];
 
+        doc.setTextColor(50, 50, 50);
+        doc.setFontSize(8);
         expItems.forEach(item => {
-            drawText("• " + item, 3);
+            checkNewPage(6);
+            doc.text(normalizeTurkish("• " + item), margin + 2, y);
+            y += 4;
         });
-        y += 5;
+        y += 4;
 
         // ===== SKILLS =====
-        drawSection(language === "tr" ? "TEKNIK BECERILER" : "TECHNICAL SKILLS");
+        checkNewPage(35);
+        doc.setTextColor(8, 145, 178);
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "bold");
+        doc.text(normalizeTurkish(language === "tr" ? "TEKNIK BECERILER" : "TECHNICAL SKILLS"), margin, y);
+        y += 6;
 
-        const skillRows = [
-            ["Frontend:", "Angular, TypeScript, React, JavaScript, HTML/CSS, TailwindCSS"],
-            ["Backend:", "Java, Spring Boot, C#, .NET, Python, Node.js"],
-            [language === "tr" ? "Veritabani:" : "Database:", "MSSQL, MongoDB, PostgreSQL, Redis"],
+        const skills = [
+            ["Languages:", "C#, Java, TypeScript, JavaScript, Python"],
+            ["Frontend:", "Angular, React, HTML/CSS, TailwindCSS"],
+            ["Backend:", ".NET, Spring Boot, Node.js, REST API"],
             ["DevOps:", "Docker, Kubernetes, GitLab CI/CD, Rancher"],
-            [language === "tr" ? "Araclar:" : "Tools:", "Git, VS Code, IntelliJ, Postman, JIRA"]
+            ["Database:", "MSSQL, MongoDB, PostgreSQL"]
         ];
-
-        skillRows.forEach(([label, value]) => {
-            doc.setTextColor(30, 30, 30);
-            doc.setFontSize(10);
-            doc.setFont("helvetica", "bold");
-            doc.text(normalizeTurkish(label), margin, y);
-            doc.setFont("helvetica", "normal");
-            doc.setTextColor(60, 60, 60);
-            doc.text(normalizeTurkish(value), margin + 28, y);
-            y += 6;
-        });
-        y += 5;
-
-        // ===== PROJECTS =====
-        drawSection(language === "tr" ? "PROJELER" : "PROJECTS");
-
-        const projects = language === "tr" ? [
-            ["Ameliyathane Optimizasyonu", "Bluetooth tabanli hasta ve ekipman takip sistemi (%30+ verimlilik)"],
-            ["Hasta Takip Sistemi", "Angular tabanli hastane hasta yonetim uygulamasi"],
-            ["KuaforBul Platform", "Next.js ile berber randevu platformu (Vercel'de canli)"],
-            ["SKT Takip", "Urun son kullanma tarihi takip uygulamasi"]
-        ] : [
-            ["Operating Room Optimization", "Bluetooth-based patient and equipment tracking (30%+ efficiency)"],
-            ["Patient Tracking System", "Angular-based hospital patient management application"],
-            ["KuaforBul Platform", "Barber appointment platform with Next.js (Live on Vercel)"],
-            ["SKT Takip", "Product expiration date tracking application"]
-        ];
-
-        projects.forEach(([name, desc]) => {
-            doc.setTextColor(30, 30, 30);
-            doc.setFontSize(10);
-            doc.setFont("helvetica", "bold");
-            doc.text(normalizeTurkish("• " + name), margin, y);
-            y += 5;
-            doc.setFont("helvetica", "normal");
-            doc.setTextColor(80, 80, 80);
-            doc.setFontSize(9);
-            doc.text(normalizeTurkish("  " + desc), margin + 3, y);
-            y += 7;
-        });
-        y += 3;
-
-        // ===== EDUCATION =====
-        drawSection(language === "tr" ? "EGITIM" : "EDUCATION");
-        drawBoldText(language === "tr" ? "Bilgisayar Muhendisligi" : "Computer Engineering");
-        drawSubText(language === "tr" ? "Karabuk Universitesi" : "Karabuk University");
-        drawGrayText("2013 - 2020");
-
-        // ===== FOOTER =====
-        doc.setDrawColor(200, 200, 200);
-        doc.setLineWidth(0.3);
-        doc.line(margin, 280, pageWidth - margin, 280);
 
         doc.setFontSize(8);
-        doc.setTextColor(120, 120, 120);
-        doc.text("github.com/ensarce  |  linkedin.com/in/ensarkaplance", pageWidth / 2, 287, { align: "center" });
+        skills.forEach(([label, value]) => {
+            checkNewPage(5);
+            doc.setTextColor(30, 30, 30);
+            doc.setFont("helvetica", "bold");
+            doc.text(label, margin, y);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(50, 50, 50);
+            doc.text(value, margin + 22, y);
+            y += 5;
+        });
+        y += 4;
+
+        // ===== PROJECTS =====
+        checkNewPage(40);
+        doc.setTextColor(8, 145, 178);
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "bold");
+        doc.text(normalizeTurkish(language === "tr" ? "PROJELER" : "PROJECTS"), margin, y);
+        y += 6;
+
+        const projects = language === "tr" ? [
+            ["Ameliyathane Optimizasyonu", "Bluetooth tabanli hasta/ekipman takip sistemi (%30+ verimlilik)"],
+            ["Hasta Takip Sistemi", "Angular + Spring Boot ile hastane yonetim uygulamasi"],
+            ["KuaforBul Platform", "Next.js ile berber randevu platformu (Vercel'de canli)"],
+            ["Magaza Yogunluk Tespiti", "Python/OpenCV ile gercek zamanli kalabalik analizi"]
+        ] : [
+            ["Operating Room Optimization", "Bluetooth-based patient/equipment tracking (30%+ efficiency)"],
+            ["Patient Tracking System", "Hospital management app with Angular + Spring Boot"],
+            ["KuaforBul Platform", "Barber appointment platform with Next.js (Live on Vercel)"],
+            ["Store Density Detection", "Real-time crowd analysis with Python/OpenCV"]
+        ];
+
+        doc.setFontSize(8);
+        projects.forEach(([name, desc]) => {
+            checkNewPage(10);
+            doc.setTextColor(30, 30, 30);
+            doc.setFont("helvetica", "bold");
+            doc.text(normalizeTurkish("• " + name), margin, y);
+            y += 4;
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(80, 80, 80);
+            doc.text(normalizeTurkish("  " + desc), margin + 2, y);
+            y += 5;
+        });
+        y += 4;
+
+        // ===== EDUCATION =====
+        checkNewPage(25);
+        doc.setTextColor(8, 145, 178);
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "bold");
+        doc.text(normalizeTurkish(language === "tr" ? "EGITIM" : "EDUCATION"), margin, y);
+        y += 6;
+
+        doc.setTextColor(30, 30, 30);
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "bold");
+        doc.text(normalizeTurkish(language === "tr" ? "Bilgisayar Muhendisligi" : "Computer Engineering"), margin, y);
+        y += 5;
+
+        doc.setTextColor(8, 145, 178);
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+        doc.text(normalizeTurkish(language === "tr" ? "Karabuk Universitesi" : "Karabuk University"), margin, y);
+        doc.setTextColor(100, 100, 100);
+        doc.text("2013 - 2020", pageWidth - margin, y, { align: "right" });
 
         // Save
         doc.save(language === "tr" ? "Ensar_Kaplan_CV.pdf" : "Ensar_Kaplan_Resume.pdf");
